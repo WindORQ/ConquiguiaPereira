@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de Conquistadores y Guías Mayores</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Encabezado -->
+<header>
+  <div class="encabezado-contenedor">
+    <div class="titulo">
+      <h1>Club de Conquistadores & Guías Mayores -- Distrito Pereira-Central</h1>
+      <p>Formando líderes para servir con amor y disciplina</p>
+    </div>
+    <img src="img/logo.png" alt="Logo del Club" class="logo-superior">
+  </div>
+</header>
+
+  <!-- Menú -->
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#conquistadores">Conquistadores</a>
+    <a href="#guias">Guías Mayores</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+ <!-- Inicio -->
+<section id="inicio">
+  <h2>Bienvenido</h2>
+  <img src="img/portada.png" alt="Club de Conquistadores y Guías Mayores " class="imagen-principal">
+  <p>Los clubes de Conquistadores y Guías Mayores ayudan a niños, adolescentes y jóvenes a crecer en mente, cuerpo y espíritu.</p>
+<!--  <button class="btn" onclick="mostrarBienvenida()">Haz clic para saber más</button>
+  <p id="mensaje"></p> -->
+</section>
+
+<!-- Conquistadores -->
+<section id="conquistadores">
+  <h2>¿Qué es el Club de Conquistadores?</h2>
+  <img src="img/conquistadores.png" alt="Conquistadores en actividades" class="imagen-seccion">
+  <p>El Club de Conquistadores es una organización mundial, patrocinada y dirigida por la Iglesia Adventista del Septimo Dia, formada por niños y jóvenes entre los 10 
+    y 15 años de edad (edad desde la cual pasan a formar parte de un Club de Centinelas o Club Guias Mayores). </p>
+  <button class="btn" onclick="toggleInfo('extraConquistadores')">Ver actividades</button>
+  <div class="extra" id="extraConquistadores">
+    <ul style="text-align: left; max-width: 600px; margin: auto;">
+      <li>Excursionismo y campamentos</li>
+      <li>Clases de especialidades</li>
+      <li>Servicio a la comunidad</li>
+      <li>Marchas y orden cerrado</li>
+      <li>Estudio de la Biblia</li>
+    </ul>
+  </div>
+</section>
+
+  <!-- Guías Mayores -->
+<section id="guias">
+  <h2>¿Qué es el Club de Guías Mayores?</h2>
+  <img src="img/guias.jpg" alt="Guías Mayores dirigiendo actividades" class="imagen-seccion">
+  <p>Visto desde el punto humano es el grado mas alto que pueden llegar los miembros del Club Conquistadores, que demuestra sus altos conocimientos y destrezas. Visto desde el punto de vista divino, EL CORRECTO, es la mayor oportunidad de servir a Dios, a la iglesia y a la comunidad.</p>
+  <button class="btn" onclick="toggleInfo('extraGuias')">Ver compromisos</button>
+  <div class="extra" id="extraGuias">
+    <ul style="text-align: left; max-width: 600px; margin: auto;">
+      <li>Ser modelos de liderazgo y servicio</li>
+      <li>Apoyar el crecimiento espiritual</li>
+      <li>Capacitación continua</li>
+      <li>Organización de campamentos y eventos</li>
+    </ul>
+  </div>
+</section>
+
+  <!-- Contacto con Formspree -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>¿Quieres unirte a un club o recibir más información? Escríbenos:</p>
+
+    <!-- Aquí pegas tu endpoint de Formspree -->
+    <form id="miFormulario" action="https://formspree.io/f/xovkdwjy" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu correo" required>
+      <input type="text" name="Telefono" placeholder="Tu telefóno" required>
+      <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..." required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <p id="respuesta"></p>
+  </section>
+
+<!-- Footer con logo -->
+<footer>
+  <img src="img/logo.png" alt="Logo del Club" class="logo-footer">
+  <p>&copy; 2025 - Clubes de Conquistadores & Guías Mayores-Pioneros | Todos los derechos reservados</p>
+</footer>
+
+  <!-- JavaScript -->
+  <script>
+    function mostrarBienvenida() {
+      document.getElementById("mensaje").innerText = 
+        "¡Descubre cómo los clubes transforman vidas con disciplina, amistad y servicio! 🌟";
+    }
+
+    function toggleInfo(id) {
+      let info = document.getElementById(id);
+      info.style.display = (info.style.display === "block") ? "none" : "block";
+    }
+
+    // ✅ Opción Extra: integrar Formspree con confirmación en pantalla
+    const form = document.getElementById("miFormulario");
+    const respuesta = document.getElementById("respuesta");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const datos = new FormData(form);
+      const res = await fetch(form.action, {
+        method: form.method,
+        body: datos,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        respuesta.innerText = "✅ ¡Mensaje enviado con éxito! Te contactaremos pronto.";
+        form.reset();
+      } else {
+        respuesta.innerText = "❌ Hubo un error al enviar el mensaje. Inténtalo de nuevo.";
+      }
+    });
+  </script>
+
+</body>
+</html>
